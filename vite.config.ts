@@ -14,7 +14,7 @@ export default defineConfig({
   ],
   optimizeDeps: {
     exclude: ['lucide-react'],
-    include: ['framer-motion']
+    include: []
   },
   build: {
     chunkSizeWarningLimit: 2000,
