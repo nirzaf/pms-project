@@ -3,13 +3,15 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react({
-    babel: {
-      parserOpts: {
-        plugins: ['moduleStringNames']
+  plugins: [
+    react({
+      babel: {
+        parserOpts: {
+          plugins: ['moduleStringNames']
+        }
       }
-    }
-  })],
+    })
+  ],
   optimizeDeps: {
     exclude: ['lucide-react'],
     include: ['framer-motion']
@@ -18,23 +20,21 @@ export default defineConfig({
     chunkSizeWarningLimit: 2000,
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
+        manualChunks: (id: string) => {
           if (id.includes('node_modules/framer-motion/')) {
             return 'framer-motion';
           }
-          if (id.includes('node_modules/three/') || 
-              id.includes('node_modules/@react-three/')) {
+          if (id.includes('node_modules/three/') || id.includes('node_modules/@react-three/')) {
             return 'three';
           }
-          if (id.includes('node_modules/react/') || 
-              id.includes('node_modules/react-dom/')) {
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
             return 'vendor';
           }
         }
       }
     },
     sourcemap: true,
-    target: 'esnext',
+    target: 'esnext'
   },
   esbuild: {
     supported: {
