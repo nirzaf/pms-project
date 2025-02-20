@@ -6,7 +6,7 @@ import { Scene } from './components/3D/Scene';
 import { animated, useSpring, useInView } from '@react-spring/web';
 
 function App() {
-  const [heroRef, heroInView] = useInView();
+  const [heroRef] = useInView();
   const [featureRef, featureInView] = useInView();
   const [bookingRef, bookingInView] = useInView();
 
