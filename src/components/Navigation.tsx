@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { animated, useSpring } from '@react-spring/web';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,27 +12,40 @@ export const Navigation = () => {
     { title: 'Book Now', href: '#', isButton: true }
   ];
 
+  const titleSpring = useSpring({
+    from: { opacity: 0, x: -20 },
+    to: { opacity: 1, x: 0 }
+  });
+
+  const menuItemSprings = useSpring({
+    from: { opacity: 0, y: -20 },
+    to: { opacity: 1, y: 0 },
+    delay: 100
+  });
+
+  const mobileMenuSpring = useSpring({
+    from: { opacity: 0, height: 0 },
+    to: { opacity: 1, height: 'auto' }
+  });
+
   return (
     <nav className="fixed w-full z-50 bg-white/10 backdrop-blur-md">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <motion.h1 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+          <animated.h1 
+            style={titleSpring}
             className="text-2xl font-bold text-white"
           >
             Paradise Resort
-          </motion.h1>
+          </animated.h1>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             {menuItems.map((item, index) => (
-              <motion.a
+              <animated.a
                 key={item.title}
                 href={item.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                style={{ ...menuItemSprings, delay: index * 100 }}
                 className={`text-white hover:text-blue-200 transition-colors ${
                   item.isButton 
                     ? 'bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg'
@@ -40,7 +53,7 @@ export const Navigation = () => {
                 }`}
               >
                 {item.title}
-              </motion.a>
+              </animated.a>
             ))}
           </div>
 
@@ -55,10 +68,8 @@ export const Navigation = () => {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+          <animated.div
+            style={mobileMenuSpring}
             className="md:hidden bg-white/20 backdrop-blur-md rounded-lg mt-2 mb-4"
           >
             <div className="flex flex-col space-y-4 p-4">
@@ -76,7 +87,7 @@ export const Navigation = () => {
                 </a>
               ))}
             </div>
-          </motion.div>
+          </animated.div>
         )}
       </div>
     </nav>
