@@ -1,4 +1,3 @@
-import React from 'react';
 import { School as Pool, Utensils, Wifi, Coffee, Dumbbell, Space as Spa } from 'lucide-react';
 
 const features = [

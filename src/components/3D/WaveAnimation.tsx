@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Mesh, Color } from 'three';
 
@@ -11,7 +11,7 @@ export const WaveAnimation = () => {
     if (meshRef.current) {
       const time = clock.getElapsedTime();
       const position = meshRef.current.geometry.attributes.position;
-      const material = meshRef.current.material as THREE.MeshStandardMaterial;
+      const material = meshRef.current.material as import('three').MeshStandardMaterial;
       
       // Animate color
       const mixedColor = color1.clone().lerp(color2, Math.sin(time * 0.2) * 0.5 + 0.5);
