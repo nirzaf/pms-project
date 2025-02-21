@@ -1,4 +1,4 @@
-import { School as Pool, Utensils, Wifi, Coffee, Dumbbell, Space as Spa } from 'lucide-react';
+import { School as Pool, Utensils, Wifi, Coffee, Dumbbell, Wine } from 'lucide-react';
 
 const features = [
   {
@@ -18,18 +18,18 @@ const features = [
   },
   {
     icon: Coffee,
-    title: 'Premium Bar',
-    description: 'Exclusive selection of fine wines and craft cocktails'
+    title: 'Artisan Coffee',
+    description: 'Premium coffee selections and expertly crafted espresso drinks'
+  },
+  {
+    icon: Wine,
+    title: 'Beverages',
+    description: 'Refreshing selection of fresh juices, teas, and signature drinks'
   },
   {
     icon: Dumbbell,
     title: 'Fitness Center',
     description: 'State-of-the-art equipment and personal training services'
-  },
-  {
-    icon: Spa,
-    title: 'Luxury Spa',
-    description: 'Rejuvenating treatments and wellness programs'
   }
 ];
 
