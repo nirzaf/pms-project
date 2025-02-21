@@ -109,7 +109,7 @@ export const HeroSection = () => {
             style={titleSpring}
             className="text-7xl font-bold mb-6 drop-shadow-lg"
           >
-            Paradise Resort & Spa
+            O'Reilly's Bungalow
           </animated.h1>
           <animated.p
             style={descriptionSpring}

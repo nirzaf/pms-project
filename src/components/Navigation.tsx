@@ -36,16 +36,16 @@ export const Navigation = () => {
             style={titleSpring}
             className="text-2xl font-bold text-white"
           >
-            Paradise Resort
+            O'Reilly's Bungalow
           </animated.h1>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {menuItems.map((item, index) => (
+            {menuItems.map((item) => (
               <animated.a
                 key={item.title}
                 href={item.href}
-                style={{ ...menuItemSprings, delay: index * 100 }}
+                style={menuItemSprings}
                 className={`text-white hover:text-blue-200 transition-colors ${
                   item.isButton 
                     ? 'bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg'
