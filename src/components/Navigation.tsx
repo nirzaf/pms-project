@@ -32,12 +32,16 @@ export const Navigation = () => {
     <nav className="fixed w-full z-50 bg-white/10 backdrop-blur-md">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <animated.h1 
+          <animated.div 
             style={titleSpring}
-            className="text-2xl font-bold text-white"
+            className="h-12"
           >
-            O'Reilly's Bungalow
-          </animated.h1>
+            <img
+              src="https://ik.imagekit.io/quadrate/assets/img/oreilly%20bungalow%20logo.jpg?updatedAt=1740137434836"
+              alt="O'Reilly's Bungalow"
+              className="h-full object-contain"
+            />
+          </animated.div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
