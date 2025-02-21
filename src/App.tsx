@@ -7,9 +7,15 @@ function App() {
   return (
     <div className="min-h-screen relative bg-white">
       <Navigation />
-      <HeroSection />
-      <FeatureHighlights />
-      <BookingSection />
+      <section id="hero">
+        <HeroSection />
+      </section>
+      <section id="features">
+        <FeatureHighlights />
+      </section>
+      <section id="booking">
+        <BookingSection />
+      </section>
     </div>
   );
 }

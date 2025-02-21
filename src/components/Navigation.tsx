@@ -6,10 +6,9 @@ export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    { title: 'Home', href: '#' },
-    { title: 'Rooms', href: '#' },
-    { title: 'Amenities', href: '#' },
-    { title: 'Book Now', href: '#', isButton: true }
+    { title: 'Home', href: '#hero' },
+    { title: 'Rooms', href: '#features' },
+    { title: 'Book Now', href: '#booking', isButton: true }
   ];
 
   const titleSpring = useSpring({
@@ -27,6 +26,15 @@ export const Navigation = () => {
     from: { opacity: 0, height: 0 },
     to: { opacity: 1, height: 'auto' }
   });
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsOpen(false);
+    }
+  };
 
   return (
     <nav className="fixed w-full z-50 bg-white/10 backdrop-blur-md">
@@ -49,6 +57,7 @@ export const Navigation = () => {
               <animated.a
                 key={item.title}
                 href={item.href}
+                onClick={(e) => handleClick(e, item.href)}
                 style={menuItemSprings}
                 className={`text-white hover:text-blue-200 transition-colors ${
                   item.isButton 
@@ -81,6 +90,7 @@ export const Navigation = () => {
                 <a
                   key={item.title}
                   href={item.href}
+                  onClick={(e) => handleClick(e, item.href)}
                   className={`text-white hover:text-blue-200 transition-colors ${
                     item.isButton 
                       ? 'bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg text-center'
