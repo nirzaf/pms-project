@@ -74,13 +74,23 @@ export const HeroSection = () => {
 
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
         <animated.div 
-          style={titleSpring}
-          className="h-64 mb-8 z-10 p-4 px-8 rounded-full bg-white/20 backdrop-blur-md"
+          style={{
+            ...titleSpring,
+            background: 'linear-gradient(145deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1))',
+          }}
+          className="h-64 mb-8 z-10 p-2 px-6 rounded-full backdrop-blur-xl 
+            shadow-[inset_-2px_-2px_10px_rgba(255,255,255,0.7),_inset_2px_2px_10px_rgba(0,0,0,0.1),_0_0_30px_rgba(255,255,255,0.3)]
+            hover:shadow-[inset_-2px_-2px_10px_rgba(255,255,255,0.7),_inset_2px_2px_10px_rgba(0,0,0,0.1),_0_0_40px_rgba(255,255,255,0.4)]
+            transition-all duration-300 ease-out
+            before:content-[''] before:absolute before:inset-0 before:rounded-full 
+            before:bg-gradient-to-br before:from-white/50 before:to-transparent before:opacity-70 before:-z-10
+            relative overflow-hidden"
         >
+          <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent rounded-full"></div>
           <img
             src="https://ik.imagekit.io/fazrinphcc/O'REILLY'S%202D%20WITH%20TRANPARENT%20BACKGROUND.png?updatedAt=1740328984931"
             alt="O'Reilly's Bungalow"
-            className="h-full object-contain"
+            className="h-full object-contain drop-shadow-lg relative z-10"
           />
         </animated.div>
 
