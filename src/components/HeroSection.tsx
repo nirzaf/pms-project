@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 
 const images = [
@@ -13,29 +12,16 @@ export const HeroSection = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      nextImage();
+      setCurrentImage((prev) => (prev + 1) % images.length);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
-
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % images.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
-  };
 
   const transitions = useTransition(currentImage, {
     from: { opacity: 0, scale: 1.1 },
     enter: { opacity: 1, scale: 1 },
     leave: { opacity: 0 },
     config: { duration: 700 }
-  });
-
-  const buttonSpring = useSpring({
-    scale: 1,
-    config: { tension: 300, friction: 10 }
   });
 
   const titleSpring = useSpring({
@@ -91,7 +77,7 @@ export const HeroSection = () => {
             transition-all duration-300 ease-out
             before:content-[''] before:absolute before:inset-0 before:rounded-full 
             before:bg-gradient-to-br before:from-white/50 before:to-transparent before:opacity-70 before:-z-10
-            relative overflow-hidden"
+            relative overflow-hidden mt-20 md:mt-0"
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent rounded-full"></div>
           <img
@@ -101,38 +87,7 @@ export const HeroSection = () => {
           />
         </animated.div>
 
-        <div className="absolute inset-0 flex items-center justify-between px-4">
-          <animated.button
-            style={{
-              ...buttonSpring,
-              transform: buttonSpring.scale.to(s => `scale(${s})`)
-            }}
-            onMouseEnter={() => buttonSpring.scale.start(1.1)}
-            onMouseLeave={() => buttonSpring.scale.start(1)}
-            onMouseDown={() => buttonSpring.scale.start(0.9)}
-            onMouseUp={() => buttonSpring.scale.start(1.1)}
-            onClick={prevImage}
-            className="p-2 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 transition-colors"
-          >
-            <ChevronLeft className="w-8 h-8 text-white" />
-          </animated.button>
-          <animated.button
-            style={{
-              ...buttonSpring,
-              transform: buttonSpring.scale.to(s => `scale(${s})`)
-            }}
-            onMouseEnter={() => buttonSpring.scale.start(1.1)}
-            onMouseLeave={() => buttonSpring.scale.start(1)}
-            onMouseDown={() => buttonSpring.scale.start(0.9)}
-            onMouseUp={() => buttonSpring.scale.start(1.1)}
-            onClick={nextImage}
-            className="p-2 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 transition-colors"
-          >
-            <ChevronRight className="w-8 h-8 text-white" />
-          </animated.button>
-        </div>
-
-        <div className="text-center text-white max-w-4xl px-4 relative z-20">
+        <div className="text-center text-white max-w-5xl px-4 relative z-20 mx-auto py-4">
           <animated.h1
             style={{
               ...titleSpring,
@@ -143,7 +98,7 @@ export const HeroSection = () => {
               backgroundClip: 'text',
               ...glowSpring
             }}
-            className="font-['Pacifico'] text-7xl mb-2 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
+            className="font-['Quicksand'] text-2xl md:text-4xl mb-4 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)] leading-[1.5] md:leading-[1.4] tracking-widest px-2 font-light uppercase"
           >
             Welcome to Paradise
           </animated.h1>
@@ -157,13 +112,13 @@ export const HeroSection = () => {
               backgroundClip: 'text',
               ...glowSpring
             }}
-            className="font-['Pacifico'] text-5xl mb-6 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
+            className="font-['Pacifico'] text-4xl md:text-6xl lg:text-7xl mb-12 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)] leading-[1.5] md:leading-[1.4] tracking-wide px-2 break-words"
           >
             O'Reilly's Bungalow
           </animated.h2>
           <animated.p
             style={descriptionSpring}
-            className="font-['Quicksand'] text-2xl mb-8 drop-shadow-lg bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white font-medium tracking-wide"
+            className="font-['Quicksand'] text-xl md:text-2xl mb-8 drop-shadow-lg bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white font-medium tracking-wide"
           >
             Where every moment feels like a gentle ocean breeze
           </animated.p>
@@ -174,15 +129,10 @@ export const HeroSection = () => {
             <div className="absolute inset-0 bg-blue-400 blur-xl opacity-20 rounded-full transform scale-110"></div>
             <animated.button
               style={{
-                ...buttonSpring,
-                transform: buttonSpring.scale.to(s => `scale(${s})`)
+                transform: 'scale(1)'
               }}
-              onMouseEnter={() => buttonSpring.scale.start(1.05)}
-              onMouseLeave={() => buttonSpring.scale.start(1)}
-              onMouseDown={() => buttonSpring.scale.start(0.95)}
-              onMouseUp={() => buttonSpring.scale.start(1.05)}
               className="relative bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 
-                text-white px-16 py-5 rounded-full text-xl font-['Quicksand'] font-bold transition-all duration-500 
+                text-white px-8 md:px-16 py-4 md:py-5 rounded-full text-lg md:text-xl font-['Quicksand'] font-bold transition-all duration-500 
                 shadow-[0_10px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.3)]
                 backdrop-blur-sm hover:tracking-wider"
             >
