@@ -72,38 +72,49 @@ export const HeroSection = () => {
         </animated.div>
       ))}
 
-      <div className="absolute inset-0 flex items-center justify-between px-4">
-        <animated.button
-          style={{
-            ...buttonSpring,
-            transform: buttonSpring.scale.to(s => `scale(${s})`)
-          }}
-          onMouseEnter={() => buttonSpring.scale.start(1.1)}
-          onMouseLeave={() => buttonSpring.scale.start(1)}
-          onMouseDown={() => buttonSpring.scale.start(0.9)}
-          onMouseUp={() => buttonSpring.scale.start(1.1)}
-          onClick={prevImage}
-          className="p-2 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 transition-colors"
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
+        <animated.div 
+          style={titleSpring}
+          className="h-48 mb-8 z-10 p-6 rounded-xl bg-white/20 backdrop-blur-md"
         >
-          <ChevronLeft className="w-8 h-8 text-white" />
-        </animated.button>
-        <animated.button
-          style={{
-            ...buttonSpring,
-            transform: buttonSpring.scale.to(s => `scale(${s})`)
-          }}
-          onMouseEnter={() => buttonSpring.scale.start(1.1)}
-          onMouseLeave={() => buttonSpring.scale.start(1)}
-          onMouseDown={() => buttonSpring.scale.start(0.9)}
-          onMouseUp={() => buttonSpring.scale.start(1.1)}
-          onClick={nextImage}
-          className="p-2 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 transition-colors"
-        >
-          <ChevronRight className="w-8 h-8 text-white" />
-        </animated.button>
-      </div>
+          <img
+            src="https://ik.imagekit.io/fazrinphcc/O'REILLY'S%202D%20WITH%20TRANPARENT%20BACKGROUND.png?updatedAt=1740328984931"
+            alt="O'Reilly's Bungalow"
+            className="h-full object-contain"
+          />
+        </animated.div>
 
-      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-between px-4">
+          <animated.button
+            style={{
+              ...buttonSpring,
+              transform: buttonSpring.scale.to(s => `scale(${s})`)
+            }}
+            onMouseEnter={() => buttonSpring.scale.start(1.1)}
+            onMouseLeave={() => buttonSpring.scale.start(1)}
+            onMouseDown={() => buttonSpring.scale.start(0.9)}
+            onMouseUp={() => buttonSpring.scale.start(1.1)}
+            onClick={prevImage}
+            className="p-2 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 transition-colors"
+          >
+            <ChevronLeft className="w-8 h-8 text-white" />
+          </animated.button>
+          <animated.button
+            style={{
+              ...buttonSpring,
+              transform: buttonSpring.scale.to(s => `scale(${s})`)
+            }}
+            onMouseEnter={() => buttonSpring.scale.start(1.1)}
+            onMouseLeave={() => buttonSpring.scale.start(1)}
+            onMouseDown={() => buttonSpring.scale.start(0.9)}
+            onMouseUp={() => buttonSpring.scale.start(1.1)}
+            onClick={nextImage}
+            className="p-2 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 transition-colors"
+          >
+            <ChevronRight className="w-8 h-8 text-white" />
+          </animated.button>
+        </div>
+
         <div className="text-center text-white max-w-4xl px-4">
           <animated.h1
             style={titleSpring}
