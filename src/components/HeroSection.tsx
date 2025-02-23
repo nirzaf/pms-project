@@ -75,7 +75,7 @@ export const HeroSection = () => {
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
         <animated.div 
           style={titleSpring}
-          className="h-48 mb-8 z-10 p-6 rounded-xl bg-white/20 backdrop-blur-md"
+          className="h-64 mb-8 z-10 p-8 rounded-xl bg-white/20 backdrop-blur-md"
         >
           <img
             src="https://ik.imagekit.io/fazrinphcc/O'REILLY'S%202D%20WITH%20TRANPARENT%20BACKGROUND.png?updatedAt=1740328984931"
