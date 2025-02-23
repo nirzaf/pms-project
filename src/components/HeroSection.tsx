@@ -39,24 +39,31 @@ export const HeroSection = () => {
   });
 
   const titleSpring = useSpring({
-    from: { opacity: 0, y: 20 },
-    to: { opacity: 1, y: 0 },
+    from: { opacity: 0, y: 50, rotate: -5 },
+    to: { opacity: 1, y: 0, rotate: 0 },
     delay: 200,
-    config: { duration: 800 }
+    config: { tension: 120, friction: 14 }
   });
 
   const descriptionSpring = useSpring({
-    from: { opacity: 0, y: 20 },
-    to: { opacity: 1, y: 0 },
-    delay: 400,
-    config: { duration: 800 }
+    from: { opacity: 0, y: 30, scale: 0.9 },
+    to: { opacity: 1, y: 0, scale: 1 },
+    delay: 800,
+    config: { tension: 120, friction: 12 }
   });
 
   const buttonContainerSpring = useSpring({
-    from: { opacity: 0, y: 20 },
+    from: { opacity: 0, y: 30 },
     to: { opacity: 1, y: 0 },
-    delay: 600,
-    config: { duration: 800 }
+    delay: 1400,
+    config: { tension: 120, friction: 12 }
+  });
+
+  const glowSpring = useSpring({
+    from: { backgroundPosition: '200% 0' },
+    to: { backgroundPosition: '-200% 0' },
+    loop: true,
+    config: { duration: 12000 }
   });
 
   return (
@@ -125,20 +132,46 @@ export const HeroSection = () => {
           </animated.button>
         </div>
 
-        <div className="text-center text-white max-w-4xl px-4">
+        <div className="text-center text-white max-w-4xl px-4 relative z-20">
           <animated.h1
-            style={titleSpring}
-            className="text-7xl font-bold mb-6 drop-shadow-lg"
+            style={{
+              ...titleSpring,
+              background: 'linear-gradient(90deg, #ffffff 0%, #f0f0f0 50%, #ffffff 100%)',
+              backgroundSize: '200% auto',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              ...glowSpring
+            }}
+            className="font-['Pacifico'] text-7xl mb-2 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
+          >
+            Welcome to Paradise
+          </animated.h1>
+          <animated.h2
+            style={{
+              ...titleSpring,
+              background: 'linear-gradient(90deg, #ffffff 0%, #f0f0f0 50%, #ffffff 100%)',
+              backgroundSize: '200% auto',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              ...glowSpring
+            }}
+            className="font-['Pacifico'] text-5xl mb-6 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
           >
             O'Reilly's Bungalow
-          </animated.h1>
+          </animated.h2>
           <animated.p
             style={descriptionSpring}
-            className="text-2xl mb-8 drop-shadow-md"
+            className="font-['Quicksand'] text-2xl mb-8 drop-shadow-lg bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white font-medium tracking-wide"
           >
-            Experience luxury like never before
+            Where every moment feels like a gentle ocean breeze
           </animated.p>
-          <animated.div style={buttonContainerSpring}>
+          <animated.div 
+            style={buttonContainerSpring}
+            className="relative inline-block"
+          >
+            <div className="absolute inset-0 bg-blue-400 blur-xl opacity-20 rounded-full transform scale-110"></div>
             <animated.button
               style={{
                 ...buttonSpring,
@@ -148,9 +181,12 @@ export const HeroSection = () => {
               onMouseLeave={() => buttonSpring.scale.start(1)}
               onMouseDown={() => buttonSpring.scale.start(0.95)}
               onMouseUp={() => buttonSpring.scale.start(1.05)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-4 rounded-lg text-xl font-semibold transition-colors shadow-lg backdrop-blur-sm"
+              className="relative bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 
+                text-white px-16 py-5 rounded-full text-xl font-['Quicksand'] font-bold transition-all duration-500 
+                shadow-[0_10px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.3)]
+                backdrop-blur-sm hover:tracking-wider"
             >
-              Book Your Stay
+              Start Your Vacation
             </animated.button>
           </animated.div>
         </div>
