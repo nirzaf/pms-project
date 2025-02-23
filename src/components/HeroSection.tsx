@@ -71,13 +71,13 @@ export const HeroSection = () => {
             ...titleSpring,
             background: 'linear-gradient(145deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1))',
           }}
-          className="h-64 mb-8 z-10 p-2 px-6 rounded-full backdrop-blur-xl 
+          className="h-64 mb-8 p-2 px-6 rounded-full backdrop-blur-xl 
             shadow-[inset_-2px_-2px_10px_rgba(255,255,255,0.7),_inset_2px_2px_10px_rgba(0,0,0,0.1),_0_0_30px_rgba(255,255,255,0.3)]
             hover:shadow-[inset_-2px_-2px_10px_rgba(255,255,255,0.7),_inset_2px_2px_10px_rgba(0,0,0,0.1),_0_0_40px_rgba(255,255,255,0.4)]
             transition-all duration-300 ease-out
             before:content-[''] before:absolute before:inset-0 before:rounded-full 
             before:bg-gradient-to-br before:from-white/50 before:to-transparent before:opacity-70 before:-z-10
-            relative overflow-hidden mt-20 md:mt-0"
+            relative overflow-hidden mt-24 md:mt-28"
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent rounded-full"></div>
           <img
