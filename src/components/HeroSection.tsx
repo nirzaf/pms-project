@@ -141,19 +141,6 @@ export const HeroSection = () => {
           </animated.div>
         </div>
       </div>
-
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {images.map((_, index) => (
-          <animated.button
-            key={index}
-            style={{
-              backgroundColor: currentImage === index ? 'white' : 'white/50'
-            }}
-            onClick={() => setCurrentImage(index)}
-            className="w-3 h-3 rounded-full transition-colors"
-          />
-        ))}
-      </div>
     </div>
   );
 };
