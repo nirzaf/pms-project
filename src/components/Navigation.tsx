@@ -43,9 +43,9 @@ export const Navigation = () => {
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
                 style={menuItemSprings}
-                className={`text-white hover:text-blue-200 transition-colors ${
+                className={`text-white hover:text-gold transition-colors ${
                   item.isButton 
-                    ? 'bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg'
+                    ? 'bg-navy hover:bg-gold px-6 py-2 rounded-lg'
                     : ''
                 }`}
               >
@@ -75,9 +75,9 @@ export const Navigation = () => {
                   key={item.title}
                   href={item.href}
                   onClick={(e) => handleClick(e, item.href)}
-                  className={`text-white hover:text-blue-200 transition-colors ${
+                  className={`text-white hover:text-gold transition-colors ${
                     item.isButton 
-                      ? 'bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg text-center'
+                      ? 'bg-navy hover:bg-gold px-6 py-2 rounded-lg text-center'
                       : ''
                   }`}
                 >

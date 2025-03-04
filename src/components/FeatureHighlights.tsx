@@ -105,7 +105,7 @@ export const FeatureHighlights = () => {
                     marginBottom: '1rem'
                   }}
                 >
-                  <feature.icon className="w-12 h-12 text-blue-600" />
+                  <feature.icon className="w-12 h-12 text-navy" />
                 </animated.div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-600">{feature.description}</p>

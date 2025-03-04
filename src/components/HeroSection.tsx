@@ -118,7 +118,7 @@ export const HeroSection = () => {
           </animated.h2>
           <animated.p
             style={descriptionSpring}
-            className="hidden md:block font-['Quicksand'] text-xl md:text-2xl mb-8 drop-shadow-lg bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white font-medium tracking-wide"
+            className="hidden md:block font-['Quicksand'] text-xl md:text-2xl mb-8 drop-shadow-lg bg-clip-text text-transparent bg-gradient-to-r from-navy/80 to-white font-medium tracking-wide"
           >
             Where every moment feels like a gentle ocean breeze
           </animated.p>
@@ -126,12 +126,12 @@ export const HeroSection = () => {
             style={buttonContainerSpring}
             className="relative inline-block mt-0 md:mt-6"
           >
-            <div className="absolute inset-0 bg-blue-400 blur-xl opacity-20 rounded-full transform scale-110"></div>
+            <div className="absolute inset-0 bg-navy blur-xl opacity-20 rounded-full transform scale-110"></div>
             <animated.button
               style={{
                 transform: 'scale(1)'
               }}
-              className="relative bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 
+              className="relative bg-gradient-to-r from-navy to-navy/80 hover:from-gold hover:to-gold/90 
                 text-white px-8 md:px-16 py-3 md:py-5 rounded-full text-lg md:text-xl font-['Quicksand'] font-bold transition-all duration-500 
                 shadow-[0_10px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.3)]
                 backdrop-blur-sm hover:tracking-wider"
