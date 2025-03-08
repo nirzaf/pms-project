@@ -54,7 +54,7 @@ export const FeatureHighlights = () => {
           Resort Amenities
         </animated.h2>
         <animated.p 
-          style={titleSpring}
+          style={{...titleSpring, delay: 400}}
           className="text-xl text-center text-gray-600 mb-16 max-w-2xl mx-auto">
           Experience luxury and comfort with our premium amenities
         </animated.p>
@@ -91,12 +91,11 @@ export const FeatureHighlights = () => {
                 key={index}
                 style={{
                   transform: props.scale.to((s, ry = props.rotateY.get(), rx = props.rotateX.get()) =>
-                    `perspective(1000px) rotateY(${ry}deg) rotateX(${rx}deg) scale(${s})`
+                    `perspective(1000px) rotateY(${ry}deg) rotateX(${rx}deg) scale(${s}) translateY(${props.y.get()}px)`
                   ),
                   boxShadow: props.shadow,
                   background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
                   borderRadius: '30px',
-                  y: props.y,
                   opacity: props.opacity
                 }}
                 onMouseEnter={(e) => {
