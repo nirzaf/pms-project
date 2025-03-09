@@ -1,0 +1,309 @@
+import { useState, useEffect } from 'react';
+import { useSpring, animated, config } from '@react-spring/web';
+
+// Image URLs from images.md
+const galleryImages = [
+  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.27_15c9b0c5.jpg?updatedAt=1741468432007",
+  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.26_32424aa8.jpg?updatedAt=1741468431993",
+  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.28_2526b803.jpg?updatedAt=1741468431968",
+  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.27_2c7ea83c.jpg?updatedAt=1741468431870",
+  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.27_5739e4e6.jpg?updatedAt=1741468431819",
+  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.28_6089c75c.jpg?updatedAt=1741468431789",
+  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.27_e12b9650.jpg?updatedAt=1741468431715",
+  "https://ik.imagekit.io/fazrinphcc/OReilly/external_resort_view.jpg?updatedAt=1741539261861"
+];
+
+// Modal component for displaying full-sized images
+interface ImageModalProps {
+  isOpen: boolean;
+  imageUrl: string;
+  onClose: () => void;
+  imageIndex: number;
+  onNext: () => void;
+  onPrevious: () => void;
+  totalImages: number;
+}
+
+const ImageModal: React.FC<ImageModalProps> = ({ 
+  isOpen, 
+  imageUrl, 
+  onClose, 
+  imageIndex,
+  onNext,
+  onPrevious,
+  totalImages
+}) => {
+  // Animation for the modal backdrop
+  const backdropSpring = useSpring({
+    opacity: isOpen ? 0.8 : 0,
+    config: { ...config.gentle, clamp: true },
+    onRest: () => {
+      if (!isOpen) {
+        document.body.style.overflow = 'auto';
+      }
+    }
+  });
+
+  // Animation for the modal content
+  const modalSpring = useSpring({
+    transform: isOpen 
+      ? 'translate(-50%, -50%) scale(1)' 
+      : 'translate(-50%, -50%) scale(0.5)',
+    opacity: isOpen ? 1 : 0,
+    config: { mass: 1, tension: 280, friction: 20 }
+  });
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isOpen) return;
+      
+      switch (e.key) {
+        case 'Escape':
+          onClose();
+          break;
+        case 'ArrowRight':
+          onNext();
+          break;
+        case 'ArrowLeft':
+          onPrevious();
+          break;
+        default:
+          break;
+      }
+    };
+
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose, onNext, onPrevious]);
+
+  if (!isOpen) return null;
+
+  return (
+    <>
+      {/* Modal backdrop */}
+      <animated.div 
+        style={{
+          ...backdropSpring,
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'black',
+          zIndex: 50
+        }}
+        onClick={onClose}
+      />
+      
+      {/* Modal content */}
+      <animated.div
+        style={{
+          ...modalSpring,
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          zIndex: 51,
+          maxWidth: '90vw',
+          maxHeight: '90vh',
+          borderRadius: '8px',
+          overflow: 'hidden',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+        }}
+        onClick={(e) => e.stopPropagation()} // Prevent clicks from closing modal
+      >
+        <div className="relative">
+          <img 
+            src={imageUrl} 
+            alt={`Full view of resort image ${imageIndex + 1}`} 
+            className="max-w-full max-h-90vh object-contain"
+          />
+          
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 bg-white/20 hover:bg-white/40 text-white rounded-full p-2 backdrop-blur-sm transition-colors duration-300"
+            aria-label="Close modal"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          
+          {/* Navigation arrows */}
+          <div className="absolute inset-y-0 left-0 flex items-center">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onPrevious();
+              }}
+              className="ml-4 bg-white/20 hover:bg-white/40 text-white rounded-full p-3 backdrop-blur-sm transition-colors duration-300 transform hover:scale-110"
+              aria-label="Previous image"
+              disabled={imageIndex === 0}
+              style={{ opacity: imageIndex === 0 ? 0.5 : 1 }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+          </div>
+          
+          <div className="absolute inset-y-0 right-0 flex items-center">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onNext();
+              }}
+              className="mr-4 bg-white/20 hover:bg-white/40 text-white rounded-full p-3 backdrop-blur-sm transition-colors duration-300 transform hover:scale-110"
+              aria-label="Next image"
+              disabled={imageIndex === totalImages - 1}
+              style={{ opacity: imageIndex === totalImages - 1 ? 0.5 : 1 }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+          
+          {/* Image caption with counter */}
+          <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-4 backdrop-blur-sm">
+            <div className="flex justify-between items-center">
+              <p className="text-lg font-medium">Resort View {imageIndex + 1}</p>
+              <p className="text-sm">{imageIndex + 1} / {totalImages}</p>
+            </div>
+          </div>
+        </div>
+      </animated.div>
+    </>
+  );
+};
+
+export const Gallery = () => {
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImageIndex, setModalImageIndex] = useState(0);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const gallerySection = document.getElementById('gallery-section');
+    if (gallerySection) {
+      observer.observe(gallerySection);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  const titleSpring = useSpring({
+    from: { opacity: 0, y: 30 },
+    to: { opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 },
+    delay: 300,
+    config: config.gentle
+  });
+
+  const subtitleSpring = useSpring({
+    from: { opacity: 0, y: 30 },
+    to: { opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 },
+    delay: 400,
+    config: config.gentle
+  });
+
+  const imageSpring = useSpring({
+    from: { opacity: 0, scale: 0.9 },
+    to: { opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 },
+    delay: 500,
+    config: config.gentle
+  });
+
+  const handleImageClick = (index: number) => {
+    setModalImageIndex(index);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const goToNextImage = () => {
+    if (modalImageIndex < galleryImages.length - 1) {
+      setModalImageIndex(prevIndex => prevIndex + 1);
+    }
+  };
+
+  const goToPreviousImage = () => {
+    if (modalImageIndex > 0) {
+      setModalImageIndex(prevIndex => prevIndex - 1);
+    }
+  };
+
+  return (
+    <section id="gallery-section" className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <animated.h2 
+          style={titleSpring}
+          className="text-5xl font-bold text-center mb-4 text-navy">
+          Our Gallery
+        </animated.h2>
+        <animated.p 
+          style={subtitleSpring}
+          className="text-xl text-center text-gray-600 mb-16 max-w-2xl mx-auto">
+          Experience the beauty and luxury of our resort through these stunning images
+        </animated.p>
+
+        <animated.div 
+          style={imageSpring}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+        >
+          {galleryImages.map((image, index) => (
+            <div 
+              key={index} 
+              className="relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              onClick={() => handleImageClick(index)}
+            >
+              <img 
+                src={image} 
+                alt={`Gallery image ${index + 1}`} 
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                style={{ aspectRatio: '1/1' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div className="p-4 text-white">
+                  <p className="font-medium">Resort View {index + 1}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </animated.div>
+      </div>
+
+      {/* Image Modal */}
+      <ImageModal 
+        isOpen={modalOpen}
+        imageUrl={galleryImages[modalImageIndex]}
+        onClose={closeModal}
+        imageIndex={modalImageIndex}
+        onNext={goToNextImage}
+        onPrevious={goToPreviousImage}
+        totalImages={galleryImages.length}
+      />
+    </section>
+  );
+};
