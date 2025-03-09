@@ -3,6 +3,7 @@ import { HeroSection } from './components/HeroSection';
 import { FeatureHighlights } from './components/FeatureHighlights';
 import { BookingSection } from './components/BookingSection';
 import { Gallery } from './components/Gallery';
+import { Footer } from './components/Footer';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <section id="booking">
         <BookingSection />
       </section>
+      <Footer />
     </div>
   );
 }

@@ -225,6 +225,14 @@ export const Gallery = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
+  
+  // Brand color palette
+  const brandColors = {
+    navy: '#050063',
+    gold: '#DEA401',
+    black: '#000000',
+    white: '#FFFFFF'
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -290,16 +298,16 @@ export const Gallery = () => {
   };
 
   return (
-    <section id="gallery-section" className="py-20 bg-white">
+    <section id="gallery-section" className="py-20 bg-[#FFFFFF]">
       <div className="container mx-auto px-4">
         <animated.h2 
           style={titleSpring}
-          className="text-5xl font-bold text-center mb-4 text-navy">
+          className="text-5xl font-bold text-center mb-4 text-[#050063]">
           Our Gallery
         </animated.h2>
         <animated.p 
           style={subtitleSpring}
-          className="text-xl text-center text-gray-600 mb-16 max-w-2xl mx-auto">
+          className="text-xl text-center text-[#000000]/70 mb-16 max-w-2xl mx-auto">
           Experience the beauty and luxury of our resort through these stunning images
         </animated.p>
 
@@ -310,25 +318,25 @@ export const Gallery = () => {
           {galleryImages.map((image, index) => (
             <div 
               key={index} 
-              className="relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer group"
+              className="relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer group bg-[#FFFFFF]"
               onClick={() => handleImageClick(index)}
             >
               {/* Animated border effect */}
               <div className="absolute inset-0 z-10 pointer-events-none">
                 {/* Top border */}
-                <div className="absolute top-0 left-0 w-0 h-[2px] bg-gradient-to-r from-gold via-navy to-gold group-hover:w-full transition-all duration-700 ease-in-out"></div>
+                <div className="absolute top-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#DEA401] via-[#050063] to-[#DEA401] group-hover:w-full transition-all duration-700 ease-in-out"></div>
                 {/* Right border */}
-                <div className="absolute top-0 right-0 w-[2px] h-0 bg-gradient-to-b from-gold via-navy to-gold group-hover:h-full transition-all duration-700 ease-in-out delay-150"></div>
+                <div className="absolute top-0 right-0 w-[2px] h-0 bg-gradient-to-b from-[#DEA401] via-[#050063] to-[#DEA401] group-hover:h-full transition-all duration-700 ease-in-out delay-150"></div>
                 {/* Bottom border */}
-                <div className="absolute bottom-0 right-0 w-0 h-[2px] bg-gradient-to-l from-gold via-navy to-gold group-hover:w-full transition-all duration-700 ease-in-out delay-300"></div>
+                <div className="absolute bottom-0 right-0 w-0 h-[2px] bg-gradient-to-l from-[#DEA401] via-[#050063] to-[#DEA401] group-hover:w-full transition-all duration-700 ease-in-out delay-300"></div>
                 {/* Left border */}
-                <div className="absolute bottom-0 left-0 w-[2px] h-0 bg-gradient-to-t from-gold via-navy to-gold group-hover:h-full transition-all duration-700 ease-in-out delay-450"></div>
+                <div className="absolute bottom-0 left-0 w-[2px] h-0 bg-gradient-to-t from-[#DEA401] via-[#050063] to-[#DEA401] group-hover:h-full transition-all duration-700 ease-in-out delay-450"></div>
                 
                 {/* Corner accents */}
-                <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200"></div>
-                <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300"></div>
-                <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-400"></div>
-                <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-500"></div>
+                <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#DEA401] opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200"></div>
+                <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#DEA401] opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300"></div>
+                <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#DEA401] opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-400"></div>
+                <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#DEA401] opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-500"></div>
               </div>
               
               <img 
@@ -337,8 +345,8 @@ export const Gallery = () => {
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 style={{ aspectRatio: '1/1' }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end z-20">
-                <div className="p-4 text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end z-20">
+                <div className="p-4 text-[#FFFFFF]">
                   <p className="font-medium">Resort View {index + 1}</p>
                 </div>
               </div>
