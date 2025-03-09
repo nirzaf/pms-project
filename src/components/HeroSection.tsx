@@ -118,7 +118,7 @@ export const HeroSection = () => {
           </animated.h2>
           <animated.p
             style={descriptionSpring}
-            className="hidden md:block font-['Quicksand'] text-xl md:text-2xl mb-8 drop-shadow-lg bg-clip-text text-transparent bg-gradient-to-r from-navy/80 to-white font-medium tracking-wide"
+            className="hidden md:block font-['Quicksand'] text-xl md:text-2xl mb-8 px-6 py-3 rounded-lg bg-black/30 backdrop-blur-sm border border-white/10 shadow-lg text-white font-medium tracking-wide inline-block mx-auto"
           >
             Where every moment feels like a gentle ocean breeze
           </animated.p>
