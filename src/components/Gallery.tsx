@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSpring, animated, config } from '@react-spring/web';
 
 // Image URLs from images.md
@@ -33,6 +33,10 @@ const ImageModal: React.FC<ImageModalProps> = ({
   onPrevious,
   totalImages
 }) => {
+  // Ref for touch handling
+  const touchStartXRef = useRef<number | null>(null);
+  const modalContentRef = useRef<HTMLDivElement>(null);
+
   // Animation for the modal backdrop
   const backdropSpring = useSpring({
     opacity: isOpen ? 0.8 : 0,
@@ -52,6 +56,31 @@ const ImageModal: React.FC<ImageModalProps> = ({
     opacity: isOpen ? 1 : 0,
     config: { mass: 1, tension: 280, friction: 20 }
   });
+
+  // Handle touch events for swipe navigation
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null) return;
+    
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartXRef.current - touchEndX;
+    
+    // Threshold for swipe detection (50px)
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        // Swipe left, go to next image
+        onNext();
+      } else {
+        // Swipe right, go to previous image
+        onPrevious();
+      }
+    }
+    
+    touchStartXRef.current = null;
+  };
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -104,31 +133,37 @@ const ImageModal: React.FC<ImageModalProps> = ({
       
       {/* Modal content */}
       <animated.div
+        ref={modalContentRef}
         style={{
           ...modalSpring,
           position: 'fixed',
           top: '50%',
           left: '50%',
           zIndex: 51,
-          maxWidth: '90vw',
+          width: '95vw',  // Slightly wider on mobile
+          maxWidth: '1200px',
           maxHeight: '90vh',
           borderRadius: '8px',
           overflow: 'hidden',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
         }}
         onClick={(e) => e.stopPropagation()} // Prevent clicks from closing modal
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className="touch-manipulation" // Improves touch behavior
       >
-        <div className="relative">
+        <div className="relative w-full h-full">
           <img 
             src={imageUrl} 
             alt={`Full view of resort image ${imageIndex + 1}`} 
-            className="max-w-full max-h-90vh object-contain"
+            className="w-full h-full object-contain"
+            style={{ maxHeight: 'calc(90vh - 80px)' }} // Account for caption height
           />
           
-          {/* Close button */}
+          {/* Close button - larger touch target on mobile */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 bg-white/20 hover:bg-white/40 text-white rounded-full p-2 backdrop-blur-sm transition-colors duration-300"
+            className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/20 hover:bg-white/40 text-white rounded-full p-2 sm:p-3 backdrop-blur-sm transition-colors duration-300 z-10"
             aria-label="Close modal"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -137,14 +172,14 @@ const ImageModal: React.FC<ImageModalProps> = ({
             </svg>
           </button>
           
-          {/* Navigation arrows */}
+          {/* Navigation arrows - larger on mobile and better positioned */}
           <div className="absolute inset-y-0 left-0 flex items-center">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onPrevious();
               }}
-              className="ml-4 bg-white/20 hover:bg-white/40 text-white rounded-full p-3 backdrop-blur-sm transition-colors duration-300 transform hover:scale-110"
+              className="ml-1 sm:ml-4 bg-white/20 hover:bg-white/40 text-white rounded-full p-2 sm:p-3 backdrop-blur-sm transition-colors duration-300 transform hover:scale-110 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center"
               aria-label="Previous image"
               disabled={imageIndex === 0}
               style={{ opacity: imageIndex === 0 ? 0.5 : 1 }}
@@ -161,7 +196,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
                 e.stopPropagation();
                 onNext();
               }}
-              className="mr-4 bg-white/20 hover:bg-white/40 text-white rounded-full p-3 backdrop-blur-sm transition-colors duration-300 transform hover:scale-110"
+              className="mr-1 sm:mr-4 bg-white/20 hover:bg-white/40 text-white rounded-full p-2 sm:p-3 backdrop-blur-sm transition-colors duration-300 transform hover:scale-110 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center"
               aria-label="Next image"
               disabled={imageIndex === totalImages - 1}
               style={{ opacity: imageIndex === totalImages - 1 ? 0.5 : 1 }}
@@ -172,11 +207,11 @@ const ImageModal: React.FC<ImageModalProps> = ({
             </button>
           </div>
           
-          {/* Image caption with counter */}
-          <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-4 backdrop-blur-sm">
+          {/* Image caption with counter - responsive text sizes */}
+          <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 sm:p-4 backdrop-blur-sm">
             <div className="flex justify-between items-center">
-              <p className="text-lg font-medium">Resort View {imageIndex + 1}</p>
-              <p className="text-sm">{imageIndex + 1} / {totalImages}</p>
+              <p className="text-base sm:text-lg font-medium truncate">Resort View {imageIndex + 1}</p>
+              <p className="text-xs sm:text-sm ml-2">{imageIndex + 1} / {totalImages}</p>
             </div>
           </div>
         </div>
