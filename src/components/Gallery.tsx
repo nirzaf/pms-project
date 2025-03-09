@@ -310,16 +310,34 @@ export const Gallery = () => {
           {galleryImages.map((image, index) => (
             <div 
               key={index} 
-              className="relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              className="relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer group"
               onClick={() => handleImageClick(index)}
             >
+              {/* Animated border effect */}
+              <div className="absolute inset-0 z-10 pointer-events-none">
+                {/* Top border */}
+                <div className="absolute top-0 left-0 w-0 h-[2px] bg-gradient-to-r from-gold via-navy to-gold group-hover:w-full transition-all duration-700 ease-in-out"></div>
+                {/* Right border */}
+                <div className="absolute top-0 right-0 w-[2px] h-0 bg-gradient-to-b from-gold via-navy to-gold group-hover:h-full transition-all duration-700 ease-in-out delay-150"></div>
+                {/* Bottom border */}
+                <div className="absolute bottom-0 right-0 w-0 h-[2px] bg-gradient-to-l from-gold via-navy to-gold group-hover:w-full transition-all duration-700 ease-in-out delay-300"></div>
+                {/* Left border */}
+                <div className="absolute bottom-0 left-0 w-[2px] h-0 bg-gradient-to-t from-gold via-navy to-gold group-hover:h-full transition-all duration-700 ease-in-out delay-450"></div>
+                
+                {/* Corner accents */}
+                <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200"></div>
+                <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300"></div>
+                <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-400"></div>
+                <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-500"></div>
+              </div>
+              
               <img 
                 src={image} 
                 alt={`Gallery image ${index + 1}`} 
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 style={{ aspectRatio: '1/1' }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end z-20">
                 <div className="p-4 text-white">
                   <p className="font-medium">Resort View {index + 1}</p>
                 </div>
