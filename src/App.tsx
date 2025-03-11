@@ -1,5 +1,6 @@
 import { Navigation } from './components/Navigation';
 import { HeroSection } from './components/HeroSection';
+import { WinterStaySection } from './components/WinterStaySection';
 import { FeatureHighlights } from './components/FeatureHighlights';
 import { BookingSection } from './components/BookingSection';
 import { Gallery } from './components/Gallery';
@@ -11,6 +12,9 @@ function App() {
       <Navigation />
       <section id="hero">
         <HeroSection />
+      </section>
+      <section id="winter-stay">
+        <WinterStaySection />
       </section>
       <section id="features">
         <FeatureHighlights />
