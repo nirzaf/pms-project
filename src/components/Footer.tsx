@@ -36,7 +36,7 @@ export const Footer = () => {
           <div className="mb-6 md:mb-0 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start">
               <img 
-                src="/src/assets/logo.png" 
+                src="https://ik.imagekit.io/fazrinphcc/O'REILLY'S%202D%20WITH%20TRANPARENT%20BACKGROUND.png.png?updatedAt=1741451666598" 
                 alt="O'Reilly's Bungalow" 
                 className="h-12 mr-3"
               />
