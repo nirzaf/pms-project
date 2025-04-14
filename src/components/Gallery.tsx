@@ -3,20 +3,26 @@ import { useSpring, animated, config } from '@react-spring/web';
 
 // Image URLs from images.md
 const galleryImages = [
-  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.27_15c9b0c5.jpg?updatedAt=1741468432007",
-  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.26_32424aa8.jpg?updatedAt=1741468431993",
-  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.28_2526b803.jpg?updatedAt=1741468431968",
-  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.27_2c7ea83c.jpg?updatedAt=1741468431870",
-  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.27_5739e4e6.jpg?updatedAt=1741468431819",
-  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.28_6089c75c.jpg?updatedAt=1741468431789",
-  "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.27_e12b9650.jpg?updatedAt=1741468431715",
-  "https://ik.imagekit.io/fazrinphcc/OReilly/external_resort_view.jpg?updatedAt=1741539261861"
+  // Original images
+  { src: 'https://ik.imagekit.io/fazrinphcc/OReilly/image-1-1534X1024.jpeg?updatedAt=1744662350489', name: 'landscape1.jpeg' },
+  { src: 'https://ik.imagekit.io/fazrinphcc/OReilly/image-4-1024X1024.jpeg?updatedAt=1744662350333', name: 'square1.jpeg' },
+  { src: 'https://ik.imagekit.io/fazrinphcc/OReilly/image-2-1534X1024.jpeg?updatedAt=1744662350269', name: 'landscape2.jpeg' },
+  { src: 'https://ik.imagekit.io/fazrinphcc/OReilly/image-2-1024X1024.jpeg?updatedAt=1744662350273', name: 'square2.jpeg' },
+  { src: "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.27_15c9b0c5.jpg?updatedAt=1741468432007", name: "resort_view_1.jpg" },
+  { src: "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.26_32424aa8.jpg?updatedAt=1741468431993", name: "resort_view_2.jpg" },
+  { src: "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.28_2526b803.jpg?updatedAt=1741468431968", name: "resort_view_3.jpg" },
+  { src: "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.27_2c7ea83c.jpg?updatedAt=1741468431870", name: "resort_view_4.jpg" },
+  { src: "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.27_5739e4e6.jpg?updatedAt=1741468431819", name: "resort_view_5.jpg" },
+  { src: "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.28_6089c75c.jpg?updatedAt=1741468431789", name: "resort_view_6.jpg" },
+  { src: "https://ik.imagekit.io/fazrinphcc/OReilly/WhatsApp%20Image%202025-03-08%20at%2016.06.27_e12b9650.jpg?updatedAt=1741468431715", name: "resort_view_7.jpg" },
+  { src: "https://ik.imagekit.io/fazrinphcc/OReilly/external_resort_view.jpg?updatedAt=1741539261861", name: "external_resort_view.jpg" }
 ];
 
 // Modal component for displaying full-sized images
 interface ImageModalProps {
   isOpen: boolean;
   imageUrl: string;
+  imageName: string;
   onClose: () => void;
   imageIndex: number;
   onNext: () => void;
@@ -27,6 +33,7 @@ interface ImageModalProps {
 const ImageModal: React.FC<ImageModalProps> = ({ 
   isOpen, 
   imageUrl, 
+  imageName,
   onClose, 
   imageIndex,
   onNext,
@@ -155,7 +162,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
         <div className="relative w-full h-full">
           <img 
             src={imageUrl} 
-            alt={`Full view of resort image ${imageIndex + 1}`} 
+            alt={`Full view of ${imageName}`} 
             className="w-full h-full object-contain"
             style={{ maxHeight: 'calc(90vh - 80px)' }} // Account for caption height
           />
@@ -210,7 +217,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
           {/* Image caption with counter - responsive text sizes */}
           <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 sm:p-4 backdrop-blur-sm">
             <div className="flex justify-between items-center">
-              <p className="text-base sm:text-lg font-medium truncate">Resort View {imageIndex + 1}</p>
+              <p className="text-base sm:text-lg font-medium truncate">{imageName}</p>
               <p className="text-xs sm:text-sm ml-2">{imageIndex + 1} / {totalImages}</p>
             </div>
           </div>
@@ -340,14 +347,14 @@ export const Gallery = () => {
               </div>
               
               <img 
-                src={image} 
-                alt={`Gallery image ${index + 1}`} 
+                src={image.src} 
+                alt={`Gallery image: ${image.name}`} 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 style={{ aspectRatio: '1/1' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end z-20">
                 <div className="p-4 text-[#FFFFFF]">
-                  <p className="font-medium">Resort View {index + 1}</p>
+                  <p className="font-medium">{image.name}</p>
                 </div>
               </div>
             </div>
@@ -358,7 +365,8 @@ export const Gallery = () => {
       {/* Image Modal */}
       <ImageModal 
         isOpen={modalOpen}
-        imageUrl={galleryImages[modalImageIndex]}
+        imageUrl={galleryImages[modalImageIndex]?.src || ''}
+        imageName={galleryImages[modalImageIndex]?.name || ''}
         onClose={closeModal}
         imageIndex={modalImageIndex}
         onNext={goToNextImage}
