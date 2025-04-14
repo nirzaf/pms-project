@@ -4,6 +4,7 @@ import { WinterStaySection } from './components/WinterStaySection';
 import { FeatureHighlights } from './components/FeatureHighlights';
 import { BookingSection } from './components/BookingSection';
 import { Gallery } from './components/Gallery';
+import { LocationMap } from './components/LocationMap';
 // LocalAssetsGallery component has been removed
 import { Footer } from './components/Footer';
 
@@ -22,6 +23,9 @@ function App() {
       </section>
       <section id="gallery">
         <Gallery />
+      </section>
+      <section id="location">
+        <LocationMap />
       </section>
       {/* LocalAssetsGallery section has been removed */}
       <section id="booking">
