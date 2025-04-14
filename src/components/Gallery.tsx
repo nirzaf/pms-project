@@ -228,18 +228,9 @@ const ImageModal: React.FC<ImageModalProps> = ({
 };
 
 export const Gallery = () => {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
-  
-  // Brand color palette
-  const brandColors = {
-    navy: '#050063',
-    gold: '#DEA401',
-    black: '#000000',
-    white: '#FFFFFF'
-  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
