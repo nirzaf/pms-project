@@ -49,7 +49,6 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, index, isHovered, se
     scale: 1,
     rotateY: 0,
     rotateX: 0,
-    shadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
     y: 0,
     opacity: 1,
     config: { mass: 1, tension: 280, friction: 20 }
@@ -59,7 +58,6 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, index, isHovered, se
     rotate: 0,
     scale: 1,
     y: 0,
-    color: 'rgb(30, 58, 138)', // navy color
     config: { mass: 1, tension: 200, friction: 15 }
   }));
   
@@ -72,63 +70,40 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, index, isHovered, se
   return (
     <animated.div
       style={{
-        transform: props.scale.to((s, ry = props.rotateY.get(), rx = props.rotateX.get()) =>
-          `perspective(1000px) rotateY(${ry}deg) rotateX(${rx}deg) scale(${s}) translateY(${props.y.get()}px)`
-        ),
-        boxShadow: props.shadow,
+        transform: props.scale.to(s => `scale(${s})`),
         background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
         borderRadius: '30px',
-        opacity: props.opacity
+        opacity: props.opacity,
+        boxShadow: isHovered 
+          ? '0 25px 30px -5px rgba(0, 0, 0, 0.2), 0 10px 15px -6px rgba(0, 0, 0, 0.1)'
+          : '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
       }}
-      onMouseEnter={(e) => {
+      onMouseEnter={() => {
         setHoveredIndex(index);
-        const rect = e.currentTarget.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        const rotateY = ((mouseX - rect.width / 2) / rect.width) * 10;
-        const rotateX = ((rect.height / 2 - mouseY) / rect.height) * 10;
-        
         set({
           scale: 1.05,
-          rotateY,
-          rotateX,
-          y: -10,
-          shadow: '0 25px 30px -5px rgba(0, 0, 0, 0.2), 0 10px 15px -6px rgba(0, 0, 0, 0.1)'
+          y: -10
         });
         setIcon({ 
           rotate: 360, 
           scale: 1.3,
-          y: -5,
-          color: 'rgb(234, 179, 8)' // gold color
+          y: -5
         });
         setGlow({
           opacity: 0.8,
           scale: 1.2
         });
       }}
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        const rotateY = ((mouseX - rect.width / 2) / rect.width) * 10;
-        const rotateX = ((rect.height / 2 - mouseY) / rect.height) * 10;
-        
-        set({ rotateX, rotateY });
-      }}
       onMouseLeave={() => {
         setHoveredIndex(null);
         set({ 
           scale: 1, 
-          rotateY: 0, 
-          rotateX: 0, 
-          y: 0,
-          shadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' 
+          y: 0
         });
         setIcon({ 
           rotate: 0, 
           scale: 1,
-          y: 0,
-          color: 'rgb(30, 58, 138)' // navy color
+          y: 0
         });
         setGlow({
           opacity: 0,
@@ -155,9 +130,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, index, isHovered, se
       />
       <animated.div
         style={{
-          transform: iconProps.rotate.to((r, s = iconProps.scale.get(), y = iconProps.y.get()) => 
-            `rotate(${r}deg) scale(${s}) translateY(${y}px)`
-          ),
+          transform: iconProps.scale.to(s => `scale(${s})`),
           transformOrigin: 'center center',
           display: 'inline-flex',
           marginBottom: '1.5rem',
@@ -166,9 +139,9 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, index, isHovered, se
         }}
       >
         <div className="p-4 bg-white/80 rounded-full shadow-lg">
-          <animated.div style={{ color: iconProps.color }}>
+          <div style={{ color: isHovered ? 'rgb(234, 179, 8)' : 'rgb(30, 58, 138)' }}>
             <feature.icon className="w-12 h-12" />
-          </animated.div>
+          </div>
         </div>
       </animated.div>
       <animated.h3 

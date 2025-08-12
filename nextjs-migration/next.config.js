@@ -4,7 +4,10 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react']
   },
   images: {
-    domains: [],
+    domains: [
+      'images.unsplash.com',
+      'ik.imagekit.io'
+    ],
     formats: ['image/webp', 'image/avif']
   }
 }
