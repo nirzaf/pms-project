@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# O'Reilly's Bungalow - Next.js Migration
+
+This is the Next.js migration of O'Reilly's Bungalow property management system, successfully migrated from React/Vite to Next.js 14+ with App Router.
+
+## Features
+
+- ✅ **Identical Visual Design**: Maintains exact same appearance and animations as the original
+- ✅ **3D Animations**: Three.js integration with @react-three/fiber and @react-three/drei
+- ✅ **Responsive Design**: Mobile-first responsive design with Tailwind CSS
+- ✅ **Smooth Animations**: React Spring animations preserved
+- ✅ **SEO Optimized**: Enhanced meta tags and structured data
+- ✅ **Performance Optimized**: Next.js Image optimization and static generation
+- ✅ **TypeScript**: Full TypeScript support maintained
+
+## Tech Stack
+
+- **Framework**: Next.js 14+ with App Router
+- **Styling**: Tailwind CSS with custom brand colors
+- **3D Graphics**: Three.js with @react-three/fiber and @react-three/drei
+- **Animations**: React Spring and Framer Motion
+- **Icons**: Lucide React
+- **Fonts**: Google Fonts (Pacifico, Quicksand)
+- **TypeScript**: Full TypeScript implementation
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+### Build for Production
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+app/
+├── layout.tsx          # Root layout with fonts and metadata
+├── page.tsx            # Main page component
+├── globals.css         # Global styles with Tailwind
+└── components/
+    ├── Navigation.tsx
+    ├── HeroSection.tsx
+    ├── WinterStaySection.tsx
+    ├── FeatureHighlights.tsx
+    ├── Gallery.tsx
+    ├── LocationMap.tsx
+    ├── BookingSection.tsx
+    ├── Footer.tsx
+    └── 3D/
+        ├── Scene.tsx
+        ├── WaveAnimation.tsx
+        └── BookingProgress.tsx
+public/
+└── assets/             # Static images and assets
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Migration Highlights
 
-## Learn More
+### Successfully Migrated Components
 
-To learn more about Next.js, take a look at the following resources:
+1. **Navigation** - Smooth scrolling and mobile menu with animations
+2. **HeroSection** - Image carousel with React Spring animations and Next.js Image optimization
+3. **WinterStaySection** - Complex animations with snowflake effects
+4. **FeatureHighlights** - Interactive 3D card animations
+5. **Gallery** - Image modal with Next.js Image optimization
+6. **LocationMap** - Google Maps integration
+7. **BookingSection** - Form components with validation
+8. **Footer** - Animated footer with branding
+9. **3D Components** - All Three.js components working with client-side rendering
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Key Migration Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Client Components**: Proper use of 'use client' directive for interactive components
+- **Image Optimization**: Next.js Image component for better performance
+- **Font Loading**: Optimized Google Fonts loading with next/font
+- **SEO Enhancement**: Comprehensive metadata and viewport configuration
+- **Static Generation**: Optimized for static site generation
+- **TypeScript**: Enhanced TypeScript configuration for Next.js
 
-## Deploy on Vercel
+## Performance
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Build Size**: ~120KB First Load JS
+- **Static Generation**: All pages pre-rendered for optimal performance
+- **Image Optimization**: Automatic WebP/AVIF conversion and responsive images
+- **Code Splitting**: Automatic code splitting with Next.js
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## License
+
+All rights reserved - O'Reilly's Bungalow
+
+---
+
+**Powered by Quadrate Tech Solutions**

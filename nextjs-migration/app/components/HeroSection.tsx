@@ -122,7 +122,7 @@ export const HeroSection = () => {
             }}
             className="font-['Pacifico'] text-4xl md:text-6xl lg:text-7xl mb-6 md:mb-12 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)] leading-[1.5] md:leading-[1.4] tracking-wide px-2 break-words"
           >
-            O'Reilly's Bungalow
+            O&apos;Reilly&apos;s Bungalow
           </animated.h2>
           <animated.p
             style={descriptionSpring}

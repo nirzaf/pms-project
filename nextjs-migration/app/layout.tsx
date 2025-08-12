@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "O'Reilly's Bungalow - Premium Accommodation",
     description: 'Experience luxury and comfort at O\'Reilly\'s Bungalow. Book your perfect getaway with stunning views and premium amenities.',
   },
-  viewport: 'width=device-width, initial-scale=1',
+
   robots: 'index, follow'
 }
 
@@ -48,4 +48,9 @@ export default function RootLayout({
       </body>
     </html>
   )
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
