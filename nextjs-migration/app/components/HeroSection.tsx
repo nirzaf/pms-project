@@ -55,6 +55,13 @@ export const HeroSection = () => {
     config: { duration: 12000 }
   });
 
+  const logoTextSpring = useSpring({
+    from: { opacity: 0, y: 20, scale: 0.9 },
+    to: { opacity: 1, y: 0, scale: 1 },
+    delay: 600,
+    config: { tension: 120, friction: 14 }
+  });
+
   return (
     <div className="relative h-screen overflow-hidden">
       {transitions((style, item) => (
@@ -75,24 +82,69 @@ export const HeroSection = () => {
         <animated.div 
           style={{
             ...titleSpring,
-            background: 'linear-gradient(145deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1))',
+            background: 'linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05))',
           }}
-          className="h-64 mb-8 p-2 px-6 rounded-full backdrop-blur-xl 
-            shadow-[inset_-2px_-2px_10px_rgba(255,255,255,0.7),_inset_2px_2px_10px_rgba(0,0,0,0.1),_0_0_30px_rgba(255,255,255,0.3)]
-            hover:shadow-[inset_-2px_-2px_10px_rgba(255,255,255,0.7),_inset_2px_2px_10px_rgba(0,0,0,0.1),_0_0_40px_rgba(255,255,255,0.4)]
-            transition-all duration-300 ease-out
+          className="group relative h-72 w-72 md:h-80 md:w-80 lg:h-96 lg:w-96 mb-8 p-4 rounded-full backdrop-blur-2xl 
+            shadow-[inset_-3px_-3px_15px_rgba(255,255,255,0.8),_inset_3px_3px_15px_rgba(0,0,0,0.15),_0_0_40px_rgba(255,255,255,0.4),_0_0_80px_rgba(222,164,1,0.2)]
+            hover:shadow-[inset_-3px_-3px_15px_rgba(255,255,255,0.9),_inset_3px_3px_15px_rgba(0,0,0,0.2),_0_0_60px_rgba(255,255,255,0.6),_0_0_120px_rgba(222,164,1,0.3)]
+            transition-all duration-500 ease-out transform hover:scale-105 animate-pulse-gentle
             before:content-[''] before:absolute before:inset-0 before:rounded-full 
-            before:bg-gradient-to-br before:from-white/50 before:to-transparent before:opacity-70 before:-z-10
-            relative overflow-hidden mt-24 md:mt-28"
+            before:bg-gradient-to-br before:from-white/30 before:via-transparent before:to-gold/20 before:opacity-60 before:-z-10
+            after:content-[''] after:absolute after:inset-[-2px] after:rounded-full 
+            after:bg-gradient-to-r after:from-gold/30 after:via-white/20 after:to-gold/30 after:opacity-0 after:hover:opacity-100 after:transition-opacity after:duration-500 after:-z-20
+            overflow-hidden mt-16 md:mt-20"
         >
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent rounded-full"></div>
-          <Image
-            src="https://ik.imagekit.io/fazrinphcc/O'REILLY'S%202D%20WITH%20TRANPARENT%20BACKGROUND.png.png?updatedAt=1741451666598"
-            alt="O'Reilly's Bungalow"
-            fill
-            className="object-contain drop-shadow-lg relative z-10"
-            priority
-          />
+          {/* Animated background rings */}
+          <div className="absolute inset-0 rounded-full">
+            <div className="absolute inset-2 rounded-full bg-gradient-to-tr from-white/20 to-transparent animate-pulse"></div>
+            <div className="absolute inset-4 rounded-full bg-gradient-to-bl from-gold/10 to-transparent opacity-70"></div>
+          </div>
+          
+          {/* Rotating glow effect */}
+          <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+            <div className="absolute inset-0 rounded-full bg-gradient-conic from-gold/20 via-transparent to-gold/20 animate-spin-slow"></div>
+          </div>
+          
+          {/* Main logo container */}
+          <div className="relative w-full h-full flex items-center justify-center z-10">
+            <div className="relative w-full h-full max-w-[85%] max-h-[85%]">
+              <Image
+                src="https://ik.imagekit.io/fazrinphcc/O'REILLY'S%202D%20WITH%20TRANPARENT%20BACKGROUND.png.png?updatedAt=1741451666598"
+                alt="O'Reilly's Bungalow - Premium Accommodation"
+                fill
+                className="object-contain drop-shadow-2xl filter brightness-110 contrast-110 group-hover:brightness-125 group-hover:contrast-125 transition-all duration-500"
+                priority
+                sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 384px"
+              />
+              
+              {/* Logo enhancement overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-white/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </div>
+          </div>
+          
+          {/* Floating particles effect */}
+          <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+            <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-gold rounded-full animate-float-1"></div>
+            <div className="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-white rounded-full animate-float-2"></div>
+            <div className="absolute bottom-1/3 left-1/3 w-1 h-1 bg-gold/70 rounded-full animate-float-3"></div>
+            <div className="absolute bottom-1/4 right-1/3 w-1.5 h-1.5 bg-white/80 rounded-full animate-float-4"></div>
+          </div>
+        </animated.div>
+
+        {/* Enhanced logo text */}
+        <animated.div 
+          style={logoTextSpring}
+          className="text-center mb-6"
+        >
+          <div className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-md border border-white/20 shadow-lg">
+            <h1 className="font-['Pacifico'] text-2xl md:text-3xl lg:text-4xl text-white drop-shadow-lg tracking-wide">
+              O&apos;Reilly&apos;s Bungalow
+            </h1>
+            <div className="h-px bg-gradient-to-r from-transparent via-gold to-transparent mt-2 opacity-70"></div>
+            <p className="font-['Quicksand'] text-sm md:text-base text-white/90 mt-1 font-medium tracking-widest uppercase">
+              Premium Accommodation
+            </p>
+          </div>
         </animated.div>
 
         <div className="text-center text-white max-w-5xl px-4 relative z-20 mx-auto py-4">
