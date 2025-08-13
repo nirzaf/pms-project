@@ -6,9 +6,11 @@ O'Reilly's Bungalow is a luxury resort property management system featuring a mo
 
 ## 🏖️ Resort Overview
 
-**Location**: Ethukala, Negombo, Sri Lanka  
+**Location**: 31A Don Bosco Road, Ethukala, Negombo, Sri Lanka  
 **Property Type**: Luxury Bungalow Resort  
-**Contact**: +94 123 456 7890  
+**Contact**: +94 777 587 755 / 0777 063 239  
+**Beach Distance**: 1.4km from Negombo Beach  
+**Airport Distance**: 11km from Airport (15-20 minutes travel time)  
 **Specialization**: Winter stays and family accommodations
 
 ### Property Features
@@ -271,8 +273,10 @@ The development server runs on `http://localhost:5173` by default.
 
 **Resort Contact:**
 
-- Phone: +94 123 456 7890
-- Location: Ethukala, Negombo, Sri Lanka
+- Phone: +94 777 587 755 / 0777 063 239
+- Address: 31A Don Bosco Road, Ethukala, Negombo, Sri Lanka
+- Beach Distance: 1.4km from Negombo Beach
+- Airport Distance: 11km from Airport (15-20 minutes travel time)
 
 **Development:**
 
